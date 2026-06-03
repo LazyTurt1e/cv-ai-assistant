@@ -1,0 +1,13 @@
+.response-window {
+    width: 700px;
+    height: 500px;
+    background-color: #63637c;
+    border-radius: 25px;
+    border: 2px solid #d6d6d6;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 20px;
+}

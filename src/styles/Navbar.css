@@ -1,0 +1,25 @@
+.navbar {
+    background-color: #b5b4d7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.logo {
+    color: #b56a00;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links button {
+    background: #56566b;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+}

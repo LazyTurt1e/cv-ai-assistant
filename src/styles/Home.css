@@ -1,0 +1,23 @@
+.page-container {
+    min-height: 100vh;
+    background-color: #9c9ac0;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+}
+
+.hero-text {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    margin-top: 20px;
+}
