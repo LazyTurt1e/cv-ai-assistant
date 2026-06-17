@@ -1,18 +1,47 @@
 import "../styles/UploadPanel.css";
 
-function UploadPanel() {
+function UploadPanel({
+    filter,
+    setFilter,
+    selectedFile,
+    setSelectedFile,
+}) {
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            setSelectedFile(file);
+        }
+    };
+
     return (
         <div className="upload-panel">
-            <button className="upload-btn">
+
+            <label className="upload-btn">
                 Upload CV
-            </button>
+                <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    hidden
+                />
+            </label>
 
-            <p>FileName.pdf</p>
+            <p>
+                {selectedFile
+                    ? selectedFile.name
+                    : "No file selected"}
+            </p>
 
-            <select>
-                <option>Filter</option>
-                <option>Résumé</option>
-                <option>Voor/Nadelen</option>
+            <select id="filter-select" value={filter} onChange={(e) => setFilter(e.target.value)}>
+
+        <option value="" disabled>Kies een filter</option>
+
+        <option value="resume">Résumé</option>
+        <option value="pros-cons">Voor/Nadelen</option>
+        <option value="growth">Potentiële Groei</option>
+
             </select>
         </div>
     );

@@ -11,3 +11,10 @@
 
     padding-top: 20px;
 }
+
+.response-content {
+    white-space: pre-line;
+    padding: 25px;
+    width: 100%;
+    color: #98b02e;
+}

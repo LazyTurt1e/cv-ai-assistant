@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Navbar from "../components/Navbar";
 import UploadPanel from "../components/UploadPanel";
 import ResponseWindow from "../components/ResponseWindow";
@@ -6,6 +8,9 @@ import Footer from "../components/Footer";
 import "../styles/Home.css";
 
 function Home() {
+    const [filter, setFilter] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+
     return (
         <div className="page-container">
             <Navbar />
@@ -20,8 +25,17 @@ function Home() {
                 </div>
 
                 <div className="content-wrapper">
-                    <UploadPanel />
-                    <ResponseWindow />
+                    <UploadPanel
+                        filter={filter}
+                        setFilter={setFilter}
+                        selectedFile={selectedFile}
+                        setSelectedFile={setSelectedFile}
+                    />
+
+                    <ResponseWindow
+                        filter={filter}
+                        selectedFile={selectedFile}
+                    />
                 </div>
             </main>
 
