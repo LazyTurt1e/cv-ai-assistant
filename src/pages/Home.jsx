@@ -8,84 +8,167 @@ import Footer from "../components/Footer";
 import "../styles/Home.css";
 
 function Home() {
+
     const [filter, setFilter] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [aiResponse, setAiResponse] = useState("");
 
-const analyzeCV = async () => {
+    const [selectedFile, setSelectedFile] =
+        useState(null);
 
-    if (!selectedFile) {
-        setAiResponse("Upload eerst een CV.");
-        return;
-    }
+    const [aiResponse, setAiResponse] =
+        useState("");
 
-    if (!filter) {
-        setAiResponse("Kies eerst een filter.");
-        return;
-    }
+    const [loading, setLoading] =
+        useState(false);
 
-    try {
 
-        const formData = new FormData();
+    const analyzeCV = async () => {
 
-        formData.append("cv", selectedFile);
-        formData.append("filter", filter);
+        if (!selectedFile) {
 
-        const response = await fetch(
-            "http://localhost:3000/analyze",
-            {
-                method: "POST",
-                body: formData,
-            }
-        );
+            setAiResponse(
+                "Upload eerst een CV."
+            );
 
-        const data = await response.json();
+            return;
 
-        setAiResponse(data.response);
+        }
 
-    } catch (error) {
+        if (!filter) {
 
-        console.error(error);
+            setAiResponse(
+                "Kies eerst een filter."
+            );
 
-        setAiResponse(
-            "Er is een fout opgetreden."
-        );
-    }
-};
+            return;
+
+        }
+
+        try {
+
+            setLoading(true);
+
+            const formData =
+                new FormData();
+
+            formData.append(
+                "cv",
+                selectedFile
+            );
+
+            formData.append(
+                "filter",
+                filter
+            );
+
+            const response =
+                await fetch(
+
+                "http://localhost:3000/analyze",
+
+                {
+
+                    method: "POST",
+
+                    body:
+                        formData,
+
+                }
+
+            );
+
+            const data =
+                await response.json();
+
+            setAiResponse(
+
+                data.response ||
+
+                "AI is momenteel niet beschikbaar."
+
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            setAiResponse(
+
+                "AI is momenteel druk bezet.\n\nProbeer later opnieuw."
+
+            );
+
+        }
+
+        finally {
+
+            setLoading(false);
+
+        }
+
+    };
+
 
     return (
+
         <div className="page-container">
-            <Navbar />
+
+            <Navbar/>
 
             <main className="main-content">
+
                 <div className="hero-text">
-                    <h2>CV-assistent met AI</h2>
+
+                    <h2>
+
+                        CV-assistent met AI
+
+                    </h2>
+
                     <p>
+
                         Upload je CV en ontvang direct feedback,
                         samenvattingen en verbeterpunten.
+
                     </p>
+
                 </div>
 
                 <div className="content-wrapper">
 
                     <UploadPanel
+
                         filter={filter}
+
                         setFilter={setFilter}
+
                         selectedFile={selectedFile}
+
                         setSelectedFile={setSelectedFile}
+
                         analyzeCV={analyzeCV}
+
                     />
 
                     <ResponseWindow
+
                         aiResponse={aiResponse}
+
+                        loading={loading}
+
                     />
 
                 </div>
+
             </main>
 
-            <Footer />
+            <Footer/>
+
         </div>
+
     );
+
 }
 
 export default Home;

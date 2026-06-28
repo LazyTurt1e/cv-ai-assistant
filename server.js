@@ -115,6 +115,41 @@ ${text}
 
                 break;
 
+                case "score":
+
+prompt = `
+
+Je bent een recruiter.
+
+Analyseer dit CV.
+
+Geef uitsluitend:
+
+Technische vaardigheden:
+/10
+
+Werkervaring:
+/10
+
+Presentatie:
+/10
+
+Potentieel:
+/10
+
+Algemene score:
+/10
+
+Korte toelichting.
+
+CV:
+
+${text}
+
+`;
+
+break;
+
             default:
 
                 return res.status(400).json({

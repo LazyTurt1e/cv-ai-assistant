@@ -54,6 +54,10 @@ function UploadPanel({
                 <option value="growth">
                     Potentiële Groei
                 </option>
+
+                <option value="score">
+                    CV Score
+                </option>
             </select>
 
             <button
